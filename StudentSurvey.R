@@ -104,3 +104,17 @@ sd(samp25)
 
 mean(survey$happy)
 sd(survey$happy)/sqrt(25)
+
+#---------START OF PROBLEM SET---------------#
+
+hist(survey$austin)
+mean(survey$austin)
+
+aust10 <- rep(NA,1000)
+for (i in 1:1000) {
+  x <-sample(survey$austin, size = 10)
+  aust10[i] <- mean(x)
+}
+hist(aust10)
+mean(aust10)
+sd(aust10)
