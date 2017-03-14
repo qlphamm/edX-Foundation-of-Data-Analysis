@@ -1,11 +1,13 @@
 # edX-Foundation-of-Data-Analysis
 #R Scripts for UTAustinX's UT.7.11x edX course Foundation of Data Analysis
+
+## PART 1 
 plot (bull$YearsPro, bull$BuckOuts12)
 abline(lm(bull$BuckOuts12 ~ bull$YearsPro))
 plot(bull$Events12, bull$BuckOuts12, xlab = "Number of 2012 Events", ylab = "Number of 2012 Buckouts", main = "Bull Rider Scatterplot")
 abline(lm(bull$BuckOuts12 ~ bull$Events12))
 
-##START OF PRELAB QUESTIONS
+#---------START OF PRELAB QUESTIONS---------
 
 #Subset for riders that participated in at least one event in 2013
 new_bull <- bull[bull$Events13  > 0 ,]
@@ -42,7 +44,7 @@ which(new_bull$Top10_13==2 & new_bull$Rides13==22)
 new_bull[4,]
 
 
-#LAB QUESTIONS
+#---------LAB QUESTIONS---------
 new_bull12 <- bull[bull$Events12 > 0,]
 
 #Make a histogram to visualize the distribution of Earnings for 2012.
@@ -72,3 +74,40 @@ vars <- c("Earnings12", "RidePer12", "CupPoints12")
 cor(nooutlier[,vars])
 plot(nooutlier$Earnings12, nooutlier$RidePer12)
 abline(lm(nooutlier$RidePer12 ~ nooutlier$Earnings12))
+
+
+
+## PART 2
+
+age <- 2014 - bull$YearBorn
+hist(age)
+t.test(age, mu = 30)
+t.test(age, muu = 30, alternative = 'less')
+
+#---------START OF PRE-LAB----------
+#1. Create a data frame for the US bull riders, and then calculate the sample mean and standard deviation for the weight of the bull-riders.
+#2. Create a histogram to visualize the distribution of bull-riders' weights.  
+#3. Confirm the assumptions of a one-sample t-test
+#4. Run the t-test and interpret the results.
+  
+#Select bull riders from the US
+USA <-bull[bull$Country=="USA",]
+
+# Summarize the bull rider weights
+mean(USA$Weight)
+sd(USA$Weight)
+
+# Visualize the weight distribution
+hist(USA$Weight, main='Histogram of US Bull Rider Weights',xlab='Weight (lbs)', xlim=c(100,200))
+
+# Run the single sample t-test
+t.test(USA$Weight, mu=190)
+sd(USA$Weight)
+
+
+#---------START OF LAB----------
+riders5 <- bull[bull$Events14 >= 5,]  
+hist(riders5$RidePer14, xlab = 'Average Ride Percentage', xlim=c(0,0.6))
+mean(riders5$RidePer14)
+sd(riders5$RidePer14)
+t.test(riders5$RidePer14, mu = 0.5)
